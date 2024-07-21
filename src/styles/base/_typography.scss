@@ -1,0 +1,64 @@
+@import "./../abstracts/mixins";
+
+@font-face {
+  font-family: "TBCX";
+  src: url("/fonts/TBCXRegular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "TBCX";
+  src: url("/fonts/TBCXMedium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "TBCX";
+  src: url("/fonts/TBCXBold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: block;
+}
+
+body {
+  font-family: "TBCX", Arial, sans-serif;
+  font-size: 1.4rem;
+  line-height: 1.7;
+  font-weight: 400;
+  color: $clr-text-secondary;
+
+  @include breakpoint("xl") {
+    font-size: 1.6rem;
+  }
+}
+
+h1 {
+  font-family: "TBCX", Arial, sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+
+  @include breakpoint("sx") {
+    font-size: 2.4rem;
+    line-height: 3.6rem;
+  }
+
+  @include breakpoint("xl") {
+    font-size: 2.8rem;
+    line-height: 4.2rem;
+  }
+}
+
+h4 {
+  font-size: 1.4rem;
+  line-height: 2.38rem;
+  font-weight: 700;
+  color: $clr-text-primary;
+
+  @include breakpoint("xl") {
+    font-size: 1.6rem;
+  }
+}

@@ -1,0 +1,29 @@
+@import "variables";
+
+@mixin responsive-container {
+  max-width: $container-max-width;
+  margin: 0 auto;
+  width: 100%;
+  padding-inline: $container-padding-mobile;
+
+  @include breakpoint("sm") {
+    padding-inline: $container-padding-tablet;
+  }
+  @include breakpoint("md") {
+    padding-inline: $container-padding-desktop;
+  }
+  @include breakpoint("xl") {
+    padding-inline: $container-padding-large-desktop;
+  }
+}
+
+@mixin breakpoint($point) {
+  $breakpoint: map-get($breakpoints, $point);
+  @if $breakpoint {
+    @media (min-width: $breakpoint) {
+      @content;
+    }
+  } @else {
+    @warn "Breakpoint '#{$point}' not found in $breakpoints map.";
+  }
+}

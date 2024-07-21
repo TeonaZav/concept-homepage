@@ -1,0 +1,33 @@
+// Colors
+$bg-color-primary: #f9fafa;
+$bg-color-secondary: #ffffff;
+$btn-blue-bg: linear-gradient(15deg, rgb(0, 22, 130), rgb(50, 64, 229));
+
+$color-black: #141719;
+$color-gray: #555f62;
+$clr-blue-active: #182cc0;
+
+$clr-text-primary: #141719;
+$clr-text-secondary: #555f62;
+$clr-text-light: #ffffff;
+
+$clr-nav-link: #222222;
+
+// Container
+$container-max-width: 111rem;
+$container-padding-mobile: 1.5rem;
+$container-padding-tablet: 4.5rem;
+$container-padding-desktop: 4.7rem;
+$container-padding-large-desktop: 0;
+
+//border
+$border: 1px solid #eef1f1;
+
+//breakpoints
+$breakpoints: (
+  "xs": 480px,
+  "sm": 768px,
+  "md": 992px,
+  "lg": 1024px,
+  "xl": 1440px,
+);
