@@ -1,0 +1,9 @@
+@import "base/reset";
+@import "base/typography";
+@import "abstracts/variables";
+@import "abstracts/mixins";
+@import "layout/main";
+
+body {
+  background-color: $bg-color-primary;
+}
