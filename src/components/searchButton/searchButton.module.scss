@@ -1,0 +1,61 @@
+@import "../../styles/abstracts/mixins";
+@import "../../styles/abstracts/variables";
+
+.searchBtn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: $clr-text-secondary;
+  transition: all 0.6s ease-out;
+
+  &:hover {
+    color: rgb(50, 149, 206);
+  }
+}
+
+.searchDropdown {
+  display: none;
+  position: absolute;
+  top: 8rem;
+  left: 0;
+  width: 100%;
+  height: 26.38rem;
+  padding-top: 5.6rem;
+  background: $bg-color-secondary;
+  padding: 1rem;
+  z-index: 1001;
+
+  .container {
+    @include responsive-container;
+  }
+
+  &.show {
+    display: block;
+  }
+
+  input {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1.4rem;
+    color: $clr-text-secondary;
+    height: 6.4rem;
+    background-color: transparent;
+    border: $border;
+    border-radius: 0.4rem;
+    margin-bottom: 0;
+    padding-left: 1.6rem;
+    padding-right: 4.4rem;
+    transition: border-color 0.25s ease-in-out;
+    position: relative;
+  }
+
+  .closeBtn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+  }
+}
