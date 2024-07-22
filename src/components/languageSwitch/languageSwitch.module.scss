@@ -1,10 +1,17 @@
 @import "../../styles/abstracts/mixins";
 @import "../../styles/abstracts/variables";
 
-.language {
+
+.headerLanguage {
   position: relative;
-  display: inline-block;
+  @include languageStyles("header");
+
 }
+
+.footerLanguage {
+  @include languageStyles("footer");
+}
+
 
 .languageSwitch {
   height: 3.6rem;
@@ -63,8 +70,6 @@
     background-color: #eef1f1;
   }
 }
-
-
 
 .language:hover .languageDropdown {
   display: block;

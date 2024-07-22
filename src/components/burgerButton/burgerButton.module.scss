@@ -53,4 +53,8 @@
       width: 2rem;
     }
   }
+
+  @include breakpoint("md") {
+    display: none;
+  }
 }

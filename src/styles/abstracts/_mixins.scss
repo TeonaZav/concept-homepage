@@ -6,7 +6,7 @@
   width: 100%;
   padding-inline: $container-padding-mobile;
 
-  @include breakpoint("sm") {
+  @include breakpoint("xs") {
     padding-inline: $container-padding-tablet;
   }
   @include breakpoint("md") {
@@ -25,5 +25,16 @@
     }
   } @else {
     @warn "Breakpoint '#{$point}' not found in $breakpoints map.";
+  }
+}
+
+@mixin languageStyles($context) {
+  @if $context == "header" {
+    display: none;
+    @include breakpoint("md") {
+      display: block;
+    }
+  } @else if $context == "footer" {
+    display: block;
   }
 }
