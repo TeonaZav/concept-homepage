@@ -1,2 +1,19 @@
 @import "../../styles/abstracts/mixins";
 @import "../../styles/abstracts/variables";
+
+.smallLogo {
+  display: block;
+}
+
+.largeLogo {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .smallLogo {
+    display: none;
+  }
+  .largeLogo {
+    display: block;
+  }
+}

@@ -1,3 +1,76 @@
 @import "../../styles/abstracts/mixins";
 @import "../../styles/abstracts/variables";
 
+
+.headerLanguage {
+  position: relative;
+  @include languageStyles("header");
+
+}
+
+.footerLanguage {
+  @include languageStyles("footer");
+}
+
+
+.languageSwitch {
+  height: 3.6rem;
+  padding-inline: 0.8rem;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: $clr-text-secondary;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border-radius: 0.4rem;
+  transition: background-color 0.25s ease-in-out;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #eef1f1;
+  }
+
+  @include breakpoint("xl") {
+    font-size: 1.6rem;
+  }
+}
+
+.languageDropdown {
+  width: 100%;
+  display: none;
+  position: absolute;
+
+  top: 110%;
+  left: 0;
+  background: $bg-color-secondary;
+  border: $border;
+  border-radius: 0.4rem;
+  padding-block: 0.8rem;
+  z-index: 1000;
+  box-shadow: 0 4px 6px 2px rgba(12, 43, 67, 0.05);
+  transition: all 0.25s ease-in-out;
+}
+
+.languageOption {
+  padding-block: 0.4rem;
+  width: 100%;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1.4rem;
+  line-height: 2.72rem;
+  font-weight: 500;
+  transition: background-color 0.25s ease-in-out;
+
+  @include breakpoint("xl") {
+    font-size: 1.6rem;
+  }
+
+  &:hover {
+    background-color: #eef1f1;
+  }
+}
+
+.language:hover .languageDropdown {
+  display: block;
+}

@@ -1,2 +1,162 @@
 @import "../../styles/abstracts/mixins";
 @import "../../styles/abstracts/variables";
+@import "../../styles/abstracts/animations";
+
+.header {
+  background-color: $bg-color-secondary;
+  border-bottom: $border;
+  height: 8rem;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    @include responsive-container;
+  }
+}
+
+.nav {
+  display: none;
+  align-items: center;
+  height: 100%;
+
+  .navItem {
+    position: relative;
+    margin-left: 2rem;
+    height: 100%;
+  }
+
+  .navBtn {
+    background-color: transparent;
+    border: none;
+    color: $clr-nav-link;
+    height: 100%;
+    font-size: inherit;
+    font-family: inherit;
+    font-weight: 400;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.6s ease;
+    -webkit-font-smoothing: antialiased;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: $clr-blue-active;
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform 0.6s ease;
+    }
+
+    &.active::after {
+      transform: scaleX(1);
+    }
+  }
+
+  .navDropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    width: 100%;
+    padding-top: 3.2rem;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+
+    &.show {
+      display: block;
+      animation: slideDown 0.4s ease forwards;
+    }
+
+    &.hide {
+      display: block;
+    }
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1.6rem;
+
+      li {
+        a {
+          text-decoration: none;
+          color: $clr-nav-link;
+          transition: all 0.4s ease-in-out;
+
+          &:hover {
+            color: $clr-blue-active;
+          }
+        }
+      }
+    }
+  }
+
+  @include breakpoint("md") {
+    display: flex;
+  }
+}
+
+.headerDropdown {
+  display: none;
+  position: absolute;
+  top: 8rem;
+  min-height: 24.8rem;
+  left: 0;
+  background-color: $bg-color-secondary;
+  z-index: 102;
+  width: 100vw;
+  opacity: 0;
+  padding-block: 3.2rem;
+  transition: height 0.6s ease-in-out, opacity 0.6s ease-in-out;
+
+  .dropdownContainer {
+    @include responsive-container;
+    .dropdownContent {
+      display: inline-flex;
+      flex-direction: column;
+      gap: 2.1rem;
+      animation: opacityAnimation 1s ease-in-out forwards;
+      .linkButton {
+        @include linkButton;
+      }
+    }
+  }
+
+  &.show {
+    display: block;
+    animation: slideDown 0.4s ease-in-out forwards;
+  }
+
+  &.hide {
+    display: block;
+    animation: slideUp 0.4s ease-in-out forwards;
+  }
+}
+
+.actions {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+
+  .linkButton {
+    @include linkButton;
+  }
+}
+
