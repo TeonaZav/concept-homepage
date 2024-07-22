@@ -64,3 +64,14 @@
     color: $hover-color;
   }
 }
+
+@mixin linkStyles($color: $clr-text-secondary, $hover-color: $clr-blue-active) {
+  text-decoration: none;
+  transition: all 0.4s ease-in-out;
+  font-size: inherit;
+  color: $color;
+  font-weight: 400;
+  &:hover {
+    color: $hover-color;
+  }
+}

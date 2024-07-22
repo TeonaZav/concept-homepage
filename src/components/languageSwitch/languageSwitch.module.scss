@@ -1,17 +1,15 @@
 @import "../../styles/abstracts/mixins";
 @import "../../styles/abstracts/variables";
 
-
 .headerLanguage {
   position: relative;
   @include languageStyles("header");
-
 }
 
 .footerLanguage {
+  position: relative;
   @include languageStyles("footer");
 }
-
 
 .languageSwitch {
   height: 3.6rem;
