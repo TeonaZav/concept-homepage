@@ -90,8 +90,7 @@
           transform: translate(-50%, -50%);
           color: $clr-blue-active;
           display: block;
-          background: url("/public/icons/download-icon.svg") no-repeat left
-            center;
+          background: url("/icons/download-icon.svg") no-repeat left center;
           padding-left: 1.8rem;
           background-size: 1.4rem 1.4rem;
         }
@@ -110,12 +109,12 @@
           border: $border-secondary;
           color: $clr-text-light;
 
+          background: url("/images/apple-store.svg") no-repeat center center;
           &:first-child {
+            background: url("/images/google-play.svg") no-repeat center center;
             &:before {
               content: "";
             }
-            background: url("/public/images/google-play.svg") no-repeat center
-              center;
           }
 
           &:last-of-type {
@@ -123,8 +122,6 @@
             &:before {
               content: "";
             }
-            background: url("/public/images/apple-store.svg") no-repeat center
-              center;
           }
         }
         img {

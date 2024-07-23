@@ -2,6 +2,7 @@ import { Header } from "../../components/header/header";
 import { Footer } from "../../components/footer/footer";
 import { Hero } from "../../components/hero/hero";
 import { DigitalBankingSection } from "../../components/digitalBanking/digitalBankingSection";
+import { StatsSection } from "../../components/statsSection/statsSection";
 
 export class Home {
   render() {
@@ -15,6 +16,9 @@ export class Home {
     });
     const hero = new Hero();
     hero.render(mainElement);
+
+    const statsSection = new StatsSection();
+    statsSection.render(mainElement);
 
     const bankingSection = new DigitalBankingSection();
     bankingSection.render(mainElement);
