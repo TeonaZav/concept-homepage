@@ -1,7 +1,6 @@
 @import "variables";
 
 @mixin responsive-container {
-  max-width: $container-max-width;
   margin: 0 auto;
   width: 100%;
   padding-inline: $container-padding-mobile;
@@ -12,8 +11,10 @@
   @include breakpoint("md") {
     padding-inline: $container-padding-desktop;
   }
+
   @include breakpoint("xl") {
     padding-inline: $container-padding-large-desktop;
+    max-width: $container-max-width;
   }
 }
 
@@ -82,3 +83,18 @@
   max-height: #{$max-height};
 }
 
+@mixin section-margin-block {
+  margin-block: 3.6rem;
+
+  @include breakpoint("xs") {
+    margin-block: 4rem;
+  }
+
+  @include breakpoint("sm") {
+    margin-block: 5rem;
+  }
+
+  @include breakpoint("md") {
+    margin-block: 6rem;
+  }
+}

@@ -1,6 +1,7 @@
 import { Header } from "../../components/header/header";
 import { Footer } from "../../components/footer/footer";
 import { Hero } from "../../components/hero/hero";
+import { DigitalBankingSection } from "../../components/digitalBanking/digitalBankingSection";
 
 export class Home {
   render() {
@@ -14,6 +15,9 @@ export class Home {
     });
     const hero = new Hero();
     hero.render(mainElement);
+
+    const bankingSection = new DigitalBankingSection();
+    bankingSection.render(mainElement);
 
     const footer = new Footer();
     footer.render(footerElement);
