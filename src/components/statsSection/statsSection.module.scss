@@ -1,0 +1,42 @@
+@import "../../styles/abstracts/mixins";
+@import "../../styles/abstracts/variables";
+@import "../../styles/abstracts/animations";
+
+.statsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+
+  .statCard {
+    background-color: $bg-color-secondary;
+    padding: 4rem 4.8rem;
+    border-radius: 0.8rem;
+    flex: 1;
+  }
+
+  .statNumber {
+    font-size: 3.6rem;
+    font-weight: 700;
+    color: $color-black;
+
+    @include breakpoint("xs") {
+      font-size: 4.4rem;
+    }
+  }
+
+  .statLabel {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: $clr-text-secondary;
+    @include breakpoint("xs") {
+      font-size: 1.6rem;
+    }
+  }
+
+  @include breakpoint("md") {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  @include section-margin-block;
+  @include responsive-container;
+}
