@@ -7,8 +7,9 @@ import { BurgerButton } from "../burgerButton/burgerButton";
 import { SearchButton } from "../searchButton/searchButton";
 import { getArrowIcon, getArrowUpIcon } from "../../utils/icons";
 
+
 export class Header {
-  render(container) {
+  render(container, onBurgerToggle) {
     container.innerHTML = `
       <header class="${styles.header}">
         <div class="${styles.container}">
@@ -57,7 +58,7 @@ export class Header {
     this.addDropdownLogic();
 
     const headerActions = document.getElementById("headerActions");
-    this.renderActions(headerActions);
+    this.renderActions(headerActions, onBurgerToggle);
   }
 
   addDropdownLogic() {
@@ -78,7 +79,7 @@ export class Header {
     );
   }
 
-  renderActions(container) {
+  renderActions(container, onBurgerToggle) {
     const searchButton = new SearchButton();
     const searchBtnContainer = document.createElement("div");
     container.appendChild(searchBtnContainer);
@@ -93,7 +94,7 @@ export class Header {
 
     container.insertAdjacentHTML("beforeend", languageSwitch("header"));
 
-    const burgerButton = new BurgerButton();
+    const burgerButton = new BurgerButton(onBurgerToggle);
     const burgerBtnContainer = document.createElement("div");
     container.appendChild(burgerBtnContainer);
     burgerButton.render(burgerBtnContainer);
