@@ -53,11 +53,17 @@ h1 {
 }
 
 h4 {
-  font-size: 1.4rem;
-  line-height: 2.38rem;
+  font-size: 1.6rem;
   font-weight: 700;
   color: $clr-text-primary;
 
+  @include breakpoint("xs") {
+    font-size: 2.4rem;
+  }
+  @include breakpoint("sm") {
+    font-size: 1.4rem;
+    line-height: 2.38rem;
+  }
   @include breakpoint("xl") {
     font-size: 1.6rem;
   }

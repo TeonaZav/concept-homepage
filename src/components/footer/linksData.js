@@ -24,6 +24,37 @@ export const navItemsFooter = [
   },
 ];
 
+export const navItemsFooterMobile = [
+  {
+    title: "პროდუქტები",
+    dropdownId: "products-links",
+    links: [
+      { text: "პროდუქტების მიმოხილვა", href: "#" },
+      { text: "ნაკრები", href: "#" },
+      { text: "პირადი ბანკირი", href: "#" },
+    ],
+  },
+  {
+    title: "შეთავაზებები",
+    dropdownId: "offers-links",
+    links: [
+      { text: "მიმოხილვა", href: "#" },
+      { text: "შეთავაზებები", href: "#" },
+      { text: "ღონისძიებები", href: "#" },
+    ],
+  },
+  {
+    title: "კონცეპტის სივრცე",
+    dropdownId: "space-links",
+    links: [
+      { text: "მიმოხილვა", href: "#" },
+      { text: "კაფე", href: "#" },
+      { text: "ბიბლიოთეკა", href: "#" },
+      { text: "კონცეპტ ფილილალები", href: "#" },
+    ],
+  },
+];
+
 export const contactInfo = [
   { image: "/icons/phone-icon.svg", text: "+995 32 2 27 27 00" },
   { image: "/icons/email-icon.svg", text: "info@tbcconcept.ge" },
