@@ -1,0 +1,125 @@
+@import "../../styles/abstracts/mixins";
+@import "../../styles/abstracts/variables";
+@import "../../styles/abstracts/animations";
+
+.selectPackageSection {
+  width: 100%;
+  overflow-x: auto;
+  @include section-margin-block;
+}
+
+.selectPackageContainer {
+  @include responsive-container;
+
+  h2 {
+    margin-bottom: 2rem;
+    @include breakpoint("xs") {
+      margin-bottom: 2.8rem;
+    }
+    @include breakpoint("sm") {
+      margin-bottom: 3.6rem;
+    }
+  }
+}
+
+.packagesGrid {
+  display: grid;
+  gap: 1.6rem;
+  grid-template-columns: repeat(3, 28rem);
+  grid-template-rows: auto;
+  padding-right: $container-padding-mobile;
+  width: max-content;
+
+  @include breakpoint("xs") {
+    padding-right: $container-padding-tablet;
+  }
+  @include breakpoint("sm") {
+    gap: 3rem;
+    overflow: hidden;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 23.2rem);
+    padding-right: 0;
+    width: 100%;
+  }
+
+  @include breakpoint("md") {
+    grid-template-rows: repeat(2, 25.6rem);
+    justify-content: center;
+  }
+}
+
+.packageCard {
+  position: relative;
+  background-color: #141719;
+  border-radius: 0.8rem;
+  overflow: hidden;
+  min-height: 23.2rem;
+
+  @include breakpoint("md") {
+    min-height: 25.6rem;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.7;
+    cursor: pointer;
+    transition: transform 0.6s ease-in-out;
+    vertical-align: middle;
+    pointer-events: none;
+  }
+
+  @include breakpoint("lg") {
+    &:hover {
+      img {
+        transform: scale(1.04);
+      }
+    }
+  }
+}
+
+.largeCard {
+  @include breakpoint("sm") {
+    grid-row: span 2;
+    grid-column: 2 / 3;
+  }
+}
+
+.packageDetails {
+  color: $clr-text-light;
+  position: absolute;
+  bottom: 2.4rem;
+  left: 2.4rem;
+
+  h3 {
+    font-size: 1.6rem;
+    line-height: 30px;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    @include breakpoint("sm") {
+      font-size: 2.4rem;
+    }
+  }
+
+  a {
+    color: inherit;
+    text-decoration: underline;
+    transition: all 0.25s ease-out;
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    font-weight: 700;
+    line-height: 1.4;
+    &:hover {
+      color: #aeaeae;
+    }
+    @include breakpoint("xs") {
+      font-size: 1.4rem;
+    }
+  }
+
+  @include breakpoint("md") {
+    bottom: 4rem;
+    left: 4rem;
+  }
+}

@@ -3,7 +3,8 @@ import { Footer } from "../../components/footer/footer";
 import { Hero } from "../../components/hero/hero";
 import { DigitalBankingSection } from "../../components/digitalBanking/digitalBankingSection";
 import { StatsSection } from "../../components/statsSection/statsSection";
-
+import { SelectPackageSection } from "../../components/selectPackage/selectPackage";
+import { TextSection } from "../../components/textSection/textSection";
 export class Home {
   render() {
     const headerElement = document.getElementById("header");
@@ -16,6 +17,12 @@ export class Home {
     });
     const hero = new Hero();
     hero.render(mainElement);
+
+    const textSection = new TextSection();
+    textSection.render(mainElement);
+
+    const selectPackageSection = new SelectPackageSection();
+    selectPackageSection.render(mainElement);
 
     const statsSection = new StatsSection();
     statsSection.render(mainElement);

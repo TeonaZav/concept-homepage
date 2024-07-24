@@ -1,0 +1,26 @@
+@import "../../styles/abstracts/mixins";
+@import "../../styles/abstracts/variables";
+
+.textSection {
+  @include section-margin-block;
+}
+
+.textBox {
+  @include responsive-container;
+  p {
+    font-size: 2.4rem;
+    line-height: 1.5;
+    font-weight: 500;
+    color: $clr-text-primary;
+
+    @include breakpoint("xs") {
+      font-size: 2.8rem;
+    }
+    @include breakpoint("sm") {
+      font-size: 3.2rem;
+    }
+    @include breakpoint("xl") {
+      font-size: 3.6rem;
+    }
+  }
+}
