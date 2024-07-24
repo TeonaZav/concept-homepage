@@ -3,6 +3,7 @@ import { Footer } from "../../components/footer/footer";
 import { Hero } from "../../components/hero/hero";
 import { DigitalBankingSection } from "../../components/digitalBanking/digitalBankingSection";
 import { StatsSection } from "../../components/statsSection/statsSection";
+import { SelectPackageSection } from "../../components/selectPackage/selectPackage";
 
 export class Home {
   render() {
@@ -16,6 +17,9 @@ export class Home {
     });
     const hero = new Hero();
     hero.render(mainElement);
+    
+    const selectPackageSection = new SelectPackageSection();
+    selectPackageSection.render(mainElement);
 
     const statsSection = new StatsSection();
     statsSection.render(mainElement);
