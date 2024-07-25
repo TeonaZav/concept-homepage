@@ -2,32 +2,25 @@ import styles from "./banner.module.scss";
 import { getArrowIcon } from "../../utils/icons";
 
 export class Banner {
-  constructor(
-    imageSrc,
-    title,
-    description,
-    headingType = "h1",
-    buttonText = "გამოიწერეთ",
-    includeIcon = true
-  ) {
-    this.imageSrc = imageSrc || "./images/hero-banner.webp";
-    this.title = title || "Default Title";
-    this.description = description || "Default description.";
+  constructor(imageSrc, title, description, headingType = 'h1', buttonText = 'გამოიწერეთ', includeIcon = true) {
+    this.imageSrc = imageSrc;
+    this.title = title;
+    this.description = description;
     this.headingType = headingType;
     this.buttonText = buttonText;
     this.includeIcon = includeIcon;
   }
 
   render(container) {
-    const headingElement = `<${this.headingType}>${this.title}</${this.headingType}>`;
-    const iconElement = this.includeIcon ? getArrowIcon() : "";
+    const headingElement = `<${this.headingType} class="${styles.title}">${this.title}</${this.headingType}>`;
+    const iconElement = this.includeIcon ? getArrowIcon() : '';
 
     container.insertAdjacentHTML(
-      "beforeend",
+      'beforeend',
       `
       <section class="${styles.bannerSection}">
         <div class="${styles.bannerWrapper}"> 
-          <div class="${styles.banner}" style="--bg-image: url('${this.imageSrc}')">
+          <div class="${styles.banner}" style="background-image: url('${this.imageSrc}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
             <div class="${styles.textBox}">
               ${headingElement}
               <p>${this.description}</p>
@@ -41,12 +34,5 @@ export class Banner {
       </section>
       `
     );
-
-    const bannerElement = container.querySelector(`.${styles.banner}`);
-    if (bannerElement) {
-      bannerElement.style.setProperty("--bg-image", `url('${this.imageSrc}')`);
-    } else {
-      console.error("Banner element not found.");
-    }
   }
 }
