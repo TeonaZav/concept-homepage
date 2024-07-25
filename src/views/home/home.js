@@ -5,6 +5,7 @@ import { DigitalBankingSection } from "../../components/digitalBanking/digitalBa
 import { StatsSection } from "../../components/statsSection/statsSection";
 import { SelectPackageSection } from "../../components/selectPackage/selectPackage";
 import { TextSection } from "../../components/textSection/textSection";
+import { PrivateBanker } from "../../components/privateBanker/privateBanker";
 export class Home {
   render() {
     const headerElement = document.getElementById("header");
@@ -15,8 +16,9 @@ export class Home {
     header.render(headerElement, (isActive) => {
       footer.setBurgerState(isActive);
     });
-    const hero = new Hero();
-    hero.render(mainElement);
+
+    const heroSection = new Hero();
+    heroSection.render(mainElement);
 
     const textSection = new TextSection();
     textSection.render(mainElement);
@@ -29,6 +31,9 @@ export class Home {
 
     const bankingSection = new DigitalBankingSection();
     bankingSection.render(mainElement);
+
+    const privateBankerSection = new PrivateBanker();
+    privateBankerSection.render(mainElement);
 
     const footer = new Footer();
     footer.render(footerElement);
