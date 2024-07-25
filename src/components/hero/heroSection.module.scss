@@ -1,4 +1,6 @@
 @import "../../styles/abstracts/variables";
 @import "../../styles/abstracts/mixins";
 
-
+.button {
+  @include link-full;
+}

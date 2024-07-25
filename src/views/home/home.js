@@ -1,6 +1,6 @@
 import { Header } from "../../components/header/header";
 import { Footer } from "../../components/footer/footer";
-import { Hero } from "../../components/hero/hero";
+import { HeroSection } from "../../components/hero/heroSection";
 import { DigitalBankingSection } from "../../components/digitalBanking/digitalBankingSection";
 import { StatsSection } from "../../components/statsSection/statsSection";
 import { SelectPackageSection } from "../../components/selectPackage/selectPackage";
@@ -15,8 +15,9 @@ export class Home {
     header.render(headerElement, (isActive) => {
       footer.setBurgerState(isActive);
     });
-    const hero = new Hero();
-    hero.render(mainElement);
+
+    const heroBanner = new HeroSection();
+    heroBanner.render(mainElement);
 
     const textSection = new TextSection();
     textSection.render(mainElement);
