@@ -32,6 +32,9 @@ export class Home {
     const bankingSection = new DigitalBankingSection();
     bankingSection.render(mainElement);
 
+    const privateBankerSection = new PrivateBanker();
+    privateBankerSection.render(mainElement);
+
     const footer = new Footer();
     footer.render(footerElement);
   }
