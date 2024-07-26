@@ -1,0 +1,27 @@
+@import "../../styles/abstracts/variables";
+@import "../../styles/abstracts/mixins";
+
+.sectionHeader {
+  margin-bottom: 2rem;
+  width: 100%;
+
+  @include breakpoint("xs") {
+    margin-bottom: 2.8rem;
+  }
+  @include breakpoint("sm") {
+    margin-bottom: 3.6rem;
+  }
+  @include responsive-padding;
+}
+
+.headingCt {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .linkButton {
+    @include linkButton;
+  }
+  @include responsive-container;
+}
