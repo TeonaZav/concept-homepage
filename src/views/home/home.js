@@ -1,11 +1,18 @@
-import { Header } from "../../components/header/header";
-import { Footer } from "../../components/footer/footer";
-import { Hero } from "../../components/hero/hero";
-import { DigitalBankingSection } from "../../components/digitalBanking/digitalBankingSection";
-import { StatsSection } from "../../components/statsSection/statsSection";
-import { SelectPackageSection } from "../../components/selectPackage/selectPackage";
-import { TextSection } from "../../components/textSection/textSection";
-import { PrivateBanker } from "../../components/privateBanker/privateBanker";
+import {
+  Header,
+  Footer,
+  Hero,
+  DigitalBankingSection,
+  StatsSection,
+  SelectPackageSection,
+  TextSection,
+  PrivateBanker,
+  OffersSection,
+} from "../../components";
+import { offerSlides } from "../../components/offersSlider/data";
+import { productsSlides } from "../../components/productsSlider/data";
+import { ProductsSection } from "../../components/productsSection/productsSection";
+
 export class Home {
   render() {
     const headerElement = document.getElementById("header");
@@ -29,8 +36,24 @@ export class Home {
     const statsSection = new StatsSection();
     statsSection.render(mainElement);
 
+    const offersSection = new OffersSection(
+      offerSlides,
+      "შეთავაზებები",
+      "ყველა შეთავაზება",
+      "/all-offers"
+    );
+    offersSection.render(mainElement);
+
     const bankingSection = new DigitalBankingSection();
     bankingSection.render(mainElement);
+
+    const productsSection = new ProductsSection(
+      productsSlides,
+      "პროდუქტები",
+      "",
+      "#"
+    );
+    productsSection.render(mainElement);
 
     const privateBankerSection = new PrivateBanker();
     privateBankerSection.render(mainElement);

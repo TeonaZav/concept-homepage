@@ -1,0 +1,10 @@
+@import "../../styles/abstracts/mixins";
+@import "../../styles/abstracts/variables";
+@import "../../styles/abstracts/animations";
+
+.productsSection {
+  @include section-margin-block;
+  @include breakpoint("xl") {
+    @include responsive-padding("inline");
+  }
+}
