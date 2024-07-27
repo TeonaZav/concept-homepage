@@ -1,0 +1,47 @@
+@import "../../styles/abstracts/variables";
+@import "../../styles/abstracts/mixins";
+
+
+.content {
+  padding: 2rem;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: stretch;
+  flex: 1;
+  gap: 1.2rem;
+  white-space: wrap;
+  min-height: 100%;
+
+  @include breakpoint("sm") {
+    padding: 2.8rem;
+    gap: 1.6rem;
+  }
+}
+
+.cardTitle {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: $clr-text-primary;
+  @include breakpoint("sm") {
+    font-size: 1.6rem;
+  }
+}
+
+.description {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+
+  p {
+    font-size: 1.2rem;
+  }
+
+  @include breakpoint("sm") {
+    p {
+      font-size: 1.4rem;
+    }
+  }
+}
