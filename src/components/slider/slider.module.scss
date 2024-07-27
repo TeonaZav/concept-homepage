@@ -17,7 +17,8 @@
   overflow-x: auto;
   white-space: nowrap;
   cursor: grab;
-  overscroll-behavior: contain;
+  overscroll-behavior: contain !important;
+  backface-visibility: hidden;
   -webkit-overflow-scrolling: touch;
   user-select: none;
   -webkit-user-select: none;
@@ -29,6 +30,7 @@
   padding-inline: $container-padding-mobile;
   padding-bottom: 2.8rem;
   height: 100%;
+  transition: all 0.3s ease;
   @include breakpoint("xs") {
     padding-inline: $container-padding-tablet;
   }
@@ -90,9 +92,11 @@
 }
 .progressBarContainer {
   flex-grow: 1;
+
   top: 0;
   left: $container-padding-mobile;
   overflow: hidden;
+
   right: 9rem;
   height: 0.2rem;
   background: rgba(0, 0, 0, 0.1);

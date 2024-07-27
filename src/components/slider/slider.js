@@ -1,5 +1,4 @@
 import { getArrowIconLeft, getArrowIconRight } from "../../utils/icons";
-
 import styles from "./slider.module.scss";
 
 export class Slider {
@@ -12,7 +11,9 @@ export class Slider {
     this.startX = 0;
     this.isSwiping = false;
     this.startScrollLeft = 0;
-    this.isOverflowing = false; 
+    this.isOverflowing = false;
+    this.isScrolling = null;
+    this.handleMove = this.handleMove.bind(this);
   }
 
   render(container) {
@@ -23,10 +24,10 @@ export class Slider {
             <div class="${styles.sliderWrapper}">
               ${this.slides.map((slide) => this.renderSlide(slide)).join("")}
             </div>
-            <div class="${styles.progressBarControlCt}">  
+            <div class="${styles.progressBarControlCt}">
               <div class="${styles.progressBarContainer}">
                 <div class="${styles.progressBar}"></div>
-              </div>  
+              </div>
               <div class="${styles.sliderControls}">
                 <button class="${styles.sliderButton} ${styles.prev}" disabled>
                   ${getArrowIconLeft()}
@@ -79,15 +80,18 @@ export class Slider {
       "touchstart",
       this.handleStart.bind(this)
     );
-    this.sliderWrapper.addEventListener("touchmove", (e) => this.handleMove(e));
-    this.sliderWrapper.addEventListener("touchend", (e) => this.handleEnd(e));
+    this.sliderWrapper.addEventListener("touchmove", this.handleMove);
+    this.sliderWrapper.addEventListener("touchend", this.handleEnd.bind(this));
     this.sliderWrapper.addEventListener(
       "mousedown",
       this.handleStart.bind(this)
     );
-    this.sliderWrapper.addEventListener("mousemove", (e) => this.handleMove(e));
-    this.sliderWrapper.addEventListener("mouseup", (e) => this.handleEnd(e));
-    this.sliderWrapper.addEventListener("mouseleave", (e) => this.handleEnd(e));
+    this.sliderWrapper.addEventListener("mousemove", this.handleMove);
+    this.sliderWrapper.addEventListener("mouseup", this.handleEnd.bind(this));
+    this.sliderWrapper.addEventListener(
+      "mouseleave",
+      this.handleEnd.bind(this)
+    );
   }
 
   calculateSlideWidths() {
@@ -128,26 +132,45 @@ export class Slider {
     this.updateButtonStates();
   }
 
-  //TODO დავამატო პროგრესბარს ანიმაცია
-  updateProgressBar() {
+  updateProgressBar(overscrolling, translateX = 0) {
     const maxScrollLeft =
       this.sliderWrapper.scrollWidth - this.sliderWrapper.clientWidth;
     const progressRatio = this.sliderWrapper.scrollLeft / maxScrollLeft;
-    const progressBarWidth = window.innerWidth < 768 ? 127 : 300;
 
+    const progressBarWidth = window.innerWidth < 768 ? 127 : 300;
     const maxProgressBarPosition =
       this.progressBarContainer.clientWidth - progressBarWidth;
     let progressPosition = progressRatio * maxProgressBarPosition;
 
-    progressPosition = Math.max(
-      0,
-      Math.min(progressPosition, maxProgressBarPosition)
-    );
+    if (progressPosition < 0) progressPosition = 0;
+    if (progressPosition > maxProgressBarPosition)
+      progressPosition = maxProgressBarPosition;
 
     this.progressBar.style.width = `${progressBarWidth}px`;
-    this.progressBar.style.transform = `translateX(${progressPosition}px)`;
 
-    this.checkOverflow();
+    if (overscrolling) {
+      let overscroll = 0;
+      if (this.sliderWrapper.scrollLeft <= 0) {
+        overscroll = -this.sliderWrapper.scrollLeft;
+      } else if (this.sliderWrapper.scrollLeft >= maxScrollLeft) {
+        overscroll = this.sliderWrapper.scrollLeft - maxScrollLeft;
+      }
+      const translateBarWidth =
+        (this.progressBar.offsetWidth / this.sliderWrapper.offsetWidth) *
+        translateX;
+
+      if (this.sliderWrapper.scrollLeft <= 0) {
+        this.progressBar.style.transform = `translateX(${
+          progressPosition - translateBarWidth
+        }px)`;
+      } else if (this.sliderWrapper.scrollLeft >= maxScrollLeft) {
+        this.progressBar.style.transform = `translateX(${
+          progressPosition + translateBarWidth
+        }px)`;
+      }
+    } else {
+      this.progressBar.style.transform = `translateX(${progressPosition}px)`;
+    }
   }
 
   updateButtonStates() {
@@ -177,6 +200,7 @@ export class Slider {
 
     this.isScrolling = setTimeout(() => {
       this.sliderWrapper.classList.remove(styles["is-scrolling"]);
+      this.checkOverflow();
     }, 100);
 
     this.updateProgressBar();
@@ -192,25 +216,31 @@ export class Slider {
   }
 
   handleMove(e) {
-    if (this.isSwiping) {
+    if (this.isSwiping && this.sliderWrapper) {
       const currentX = e.touches ? e.touches[0].clientX : e.clientX;
       const deltaX = currentX - this.startX;
-      const newScrollLeft = this.startScrollLeft - deltaX;
+      let newScrollLeft = this.startScrollLeft - deltaX;
+      const maxScrollLeft =
+        this.sliderWrapper.scrollWidth - this.sliderWrapper.clientWidth;
 
-      if (
-        newScrollLeft < 0 ||
-        newScrollLeft >
-          this.sliderWrapper.scrollWidth - this.sliderWrapper.clientWidth
-      ) {
-        this.isOverflowing = true;
-        this.sliderWrapper.style.transform = `translateX(${deltaX / 2}px)`;
-      } else {
-        this.isOverflowing = false;
-        this.sliderWrapper.style.transform = "none";
-        this.sliderWrapper.scrollLeft = newScrollLeft;
+      const isAtLeftEdge = this.startScrollLeft === 0;
+      const isAtRightEdge = this.startScrollLeft === maxScrollLeft;
+
+      let overscroll = 0;
+      if (isAtLeftEdge && newScrollLeft < 0) {
+        overscroll = -newScrollLeft;
+        newScrollLeft = 0;
+      } else if (isAtRightEdge && newScrollLeft > maxScrollLeft) {
+        overscroll = newScrollLeft - maxScrollLeft;
+        newScrollLeft = maxScrollLeft;
       }
+
+      this.sliderWrapper.scrollLeft = newScrollLeft;
+      const translateX = isAtLeftEdge ? overscroll : -overscroll;
+      this.sliderWrapper.style.transform = `translateX(${translateX}px)`;
+
+      this.updateProgressBar(translateX ? true : false, overscroll);
     }
-    console.log("handleMove - isOverflowing:", this.isOverflowing);
   }
 
   handleEnd() {
@@ -219,31 +249,33 @@ export class Slider {
 
     const maxScrollLeft =
       this.sliderWrapper.scrollWidth - this.sliderWrapper.clientWidth;
+    const currentScrollLeft = this.sliderWrapper.scrollLeft;
 
-    if (this.sliderWrapper.scrollLeft < 0) {
-      this.isOverflowing = true;
-      this.animateBounceBack(0);
-    } else if (this.sliderWrapper.scrollLeft > maxScrollLeft) {
-      this.isOverflowing = true;
-      this.animateBounceBack(maxScrollLeft);
+    if (currentScrollLeft < 0 || currentScrollLeft > maxScrollLeft) {
+      const targetScrollLeft = currentScrollLeft < 0 ? 0 : maxScrollLeft;
+      this.animateBounceBack(targetScrollLeft);
     } else {
-      this.isOverflowing = false;
-      this.sliderWrapper.style.transition = "none";
-      this.sliderWrapper.style.transform = "none";
+      this.resetTransform();
     }
-    console.log("handleEnd - isOverflowing:", this.isOverflowing);
+
+    this.updateProgressBar(false);
   }
 
   animateBounceBack(targetScrollLeft) {
     this.sliderWrapper.style.transition = "transform 0.5s ease-out";
-    this.sliderWrapper.style.transform = `translateX(${
-      targetScrollLeft - this.sliderWrapper.scrollLeft
-    }px)`;
+    const translateX = targetScrollLeft - this.sliderWrapper.scrollLeft;
+    this.sliderWrapper.style.transform = `translateX(${translateX}px)`;
+
     setTimeout(() => {
-      this.sliderWrapper.style.transition = "none";
-      this.sliderWrapper.style.transform = "none";
+      this.resetTransform();
       this.sliderWrapper.scrollLeft = targetScrollLeft;
     }, 500);
+  }
+
+  resetTransform() {
+    this.sliderWrapper.style.transition = "none";
+    this.sliderWrapper.style.transform = "none";
+    this.updateProgressBar(false);
   }
 
   checkOverflow() {
@@ -252,6 +284,10 @@ export class Slider {
     this.isOverflowing =
       this.sliderWrapper.scrollLeft < 0 ||
       this.sliderWrapper.scrollLeft > maxScrollLeft;
-    console.log("checkOverflow - isOverflowing:", this.isOverflowing);
+    if (this.isOverflowing) {
+      const targetScrollLeft =
+        this.sliderWrapper.scrollLeft < 0 ? 0 : maxScrollLeft;
+      this.animateBounceBack(targetScrollLeft);
+    }
   }
 }
