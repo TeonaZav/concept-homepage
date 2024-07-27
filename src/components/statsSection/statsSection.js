@@ -27,8 +27,10 @@ export class StatsSection {
     container.insertAdjacentHTML(
       "beforeend",
       `
-        <section class="${styles.statsContainer}">
+        <section class="${styles.statsSection}">
+         <div class="${styles.statsContainer}">
           ${statsContent}
+         </div>
         </section>
       `
     );

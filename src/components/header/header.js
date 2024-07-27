@@ -7,11 +7,11 @@ import { BurgerButton } from "../burgerButton/burgerButton";
 import { SearchButton } from "../searchButton/searchButton";
 import { getArrowIcon, getArrowUpIcon } from "../../utils/icons";
 
-
 export class Header {
   render(container, onBurgerToggle) {
     container.innerHTML = `
       <header class="${styles.header}">
+       <div class="${styles.wrapper}">
         <div class="${styles.container}">
           <div class="${styles.logo}">
             ${logo("#555f62")}
@@ -43,13 +43,16 @@ export class Header {
         <div id="headerDropdown" class="${styles.headerDropdown}">
           <div class="${styles.dropdownContainer}">
            <div class="${styles.dropdownContent}">
-            <img src="/images/credit-cards.png"/>
+            <img src="/images/credit-cards.png" class="${
+              styles.dropdownImage
+            }" loding="lazy" />
             <a href="#" class="${styles.linkButton}">
               ${getArrowUpIcon()}
               <span>ციფრული ბანკი</span>
             </a>            
            </div>
           </div>
+        </div>
         </div>
       </header>
     `;

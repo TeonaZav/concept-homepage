@@ -10,6 +10,7 @@
     align-items: center;
     justify-content: space-between;
     padding-block: 3.2rem;
+  
     @include responsive-container;
 
     @include breakpoint("xs") {
@@ -48,6 +49,7 @@
   &:not(.mobileNav) {
     .middleSection {
       @include breakpoint("sm") {
+      
         @include responsive-container;
       }
     }
@@ -145,6 +147,7 @@
     }
 
     @media (max-width: 768px) {
+    
       @include responsive-container;
     }
   }

@@ -7,7 +7,7 @@
   padding-block: 3.2rem;
   min-height: auto;
   @include section-margin-block;
-
+  @include responsive-padding;
   @include breakpoint("xs") {
     padding-block: 4.5rem;
   }
@@ -24,7 +24,6 @@
 
   .bankingContainer {
     height: 100%;
-
     @include responsive-container;
   }
 
