@@ -9,7 +9,10 @@ import { SelectPackageSection } from "./selectPackage/selectPackage";
 import { TextSection } from "./textSection/textSection";
 import { Slider } from "./slider/slider";
 import { OffersSlider } from "./offersSlider/offersSlider";
+import { AwardsSlider } from "./awardsSlider/awardsSlider";
 import { OffersSection } from "./offersSection/offersSection";
+import { ProductsSection } from "./productsSection/productsSection";
+import { AwardsSection } from "./awardsSection/awardsSection";
 export {
   Header,
   Banner,
@@ -21,6 +24,9 @@ export {
   SelectPackageSection,
   TextSection,
   Slider,
+  AwardsSlider,
   OffersSlider,
   OffersSection,
+  ProductsSection,
+  AwardsSection,
 };

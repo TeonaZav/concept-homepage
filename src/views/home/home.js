@@ -8,10 +8,12 @@ import {
   TextSection,
   PrivateBanker,
   OffersSection,
+  ProductsSection,
+  AwardsSection,
 } from "../../components";
+import { awardsSlides } from "../../components/awardsSlider/data";
 import { offerSlides } from "../../components/offersSlider/data";
 import { productsSlides } from "../../components/productsSlider/data";
-import { ProductsSection } from "../../components/productsSection/productsSection";
 
 export class Home {
   render() {
@@ -57,6 +59,14 @@ export class Home {
 
     const privateBankerSection = new PrivateBanker();
     privateBankerSection.render(mainElement);
+
+    const awardsSection = new AwardsSection(
+      awardsSlides,
+      "ჯილდოები",
+      "",
+      "#"
+    );
+    awardsSection.render(mainElement);
 
     const footer = new Footer();
     footer.render(footerElement);
