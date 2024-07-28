@@ -22,14 +22,11 @@ export class ProductsSection {
       "beforeend",
       `
       <section class="${styles.productsSection}">
-          ${sectionHeaderHTML}
-        <div class="${styles.sliderContainer}">
-          <div id="products-slider" class="${styles.sliderWrapper}"></div>
-        </div>
+        ${sectionHeaderHTML}
       </section>`
     );
 
     const slider = new ProductSlider(this.slides);
-    slider.render(document.getElementById("products-slider"));
+    slider.render(container.querySelector(`.${styles.productsSection}`));
   }
 }
