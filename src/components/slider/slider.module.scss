@@ -14,9 +14,9 @@
 
 .sliderWrapper {
   display: flex;
-  overflow-x: auto;
+  overflow-x: hidden; 
   white-space: nowrap;
-  cursor: grab;
+  cursor: default; 
   overscroll-behavior: contain !important;
   backface-visibility: hidden;
   -webkit-overflow-scrolling: touch;
@@ -48,6 +48,9 @@
     width: 0;
     height: 0;
   }
+  &.is-grabbing {
+    cursor: grabbing; 
+  }
 }
 
 .slide {
@@ -73,11 +76,11 @@
   }
 
   @media (min-width: 600px) {
-    max-width: calc((90% - 1.5rem) / 2);
+    max-width: calc((100% - 1.5rem) / 2);
   }
 
   @media (min-width: 1024px) {
-    max-width: calc((100% - 2 * 3rem) / 3 - 3px);
+    max-width: calc((100% - 2 * 3rem) / 3);
   }
   @include breakpoint("sm") {
     border-radius: 0.8rem;
@@ -152,16 +155,14 @@
 }
 
 .is-scrolling {
-  animation: carouselEffect 0.5s ease-out;
+  // animation: carouselEffect 0.5s ease-out;
+  transition: all 0.2s ease-in-out;
 }
 
 .rubberband-effect {
   animation: rubberband 0.8s ease-out;
 }
 
-.is-grabbing {
-  cursor: grabbing;
-}
 
 .imgWrapper {
   position: relative;
