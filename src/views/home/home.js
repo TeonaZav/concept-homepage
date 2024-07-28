@@ -15,18 +15,23 @@ import { awardsSlides } from "../../components/awardsSlider/data";
 import { offerSlides } from "../../components/offersSlider/data";
 import { productsSlides } from "../../components/productsSlider/data";
 
+
 export class Home {
+  constructor(translations) {
+    this.translations = translations;
+  }
+
   render() {
     const headerElement = document.getElementById("header");
     const mainElement = document.getElementById("main");
     const footerElement = document.getElementById("footer");
-
-    const header = new Header();
+    console.log(this.translations.headerData);
+    const header = new Header(this.translations.headerData);
     header.render(headerElement, (isActive) => {
       footer.setBurgerState(isActive);
     });
 
-    const heroSection = new Hero();
+    const heroSection = new Hero(this.translations.heroData, true);
     heroSection.render(mainElement);
 
     const textSection = new TextSection();
@@ -60,15 +65,10 @@ export class Home {
     const privateBankerSection = new PrivateBanker();
     privateBankerSection.render(mainElement);
 
-    const awardsSection = new AwardsSection(
-      awardsSlides,
-      "ჯილდოები",
-      "",
-      "#"
-    );
+    const awardsSection = new AwardsSection(awardsSlides, "ჯილდოები", "", "#");
     awardsSection.render(mainElement);
 
-    const footer = new Footer();
+    const footer = new Footer(this.translations.footerData);
     footer.render(footerElement);
   }
 }

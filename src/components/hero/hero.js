@@ -3,14 +3,16 @@ import { getArrowIcon } from "../../utils/icons";
 import styles from "./hero.module.scss";
 
 export class Hero extends Banner {
-  constructor(
-    imageSrc = './images/hero-banner.webp',
-    title = 'თიბისი კონცეპტი',
-    description = 'პერსონალური საბანკო მომსახურება, მორგებული თქვენს საჭიროებებსა და ინტერესებზე',
-    buttonText = 'გამოიწერეთ',
-    includeIcon = true
-  ) {
-    super(imageSrc, title, description, 'h1', buttonText, includeIcon);
+  constructor(data, includeIcon = true) {
+    console.log(data);
+    super(
+      data?.imageSrc,
+      data?.title,
+      data?.description,
+      "h1",
+      data?.buttonText,
+      includeIcon
+    );
   }
 
   render(container) {

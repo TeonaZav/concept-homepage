@@ -10,7 +10,7 @@
     align-items: center;
     justify-content: space-between;
     padding-block: 3.2rem;
-  
+    @include responsive-padding;
     @include responsive-container;
 
     @include breakpoint("xs") {
@@ -49,7 +49,6 @@
   &:not(.mobileNav) {
     .middleSection {
       @include breakpoint("sm") {
-      
         @include responsive-container;
       }
     }
@@ -61,6 +60,7 @@
     flex: 1;
     border-top: $border;
     overflow: hidden;
+    @include responsive-padding;
     @include calculate-max-height(2.4rem, 1.6rem, 1.5);
     transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
     padding-bottom: 2.4rem;
@@ -147,7 +147,6 @@
     }
 
     @media (max-width: 768px) {
-    
       @include responsive-container;
     }
   }
@@ -173,7 +172,7 @@
     $clr-text-secondary: #555f62;
     flex: 0;
     min-height: auto;
-
+    @include responsive-padding;
     .footerBottomCt {
       display: flex;
       flex-direction: column-reverse;
@@ -224,7 +223,7 @@
     flex-direction: column;
     gap: 3.2rem;
     padding-block: 3.2rem;
-
+    @include responsive-padding;
     .contactList {
       flex: 1;
 
@@ -311,11 +310,13 @@
       display: flex;
       flex-direction: column;
       flex: 1;
-      border-top: $border;
       overflow: hidden;
       @include calculate-max-height(3.2rem, 1.8rem, 1.5);
       transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
       padding-bottom: 3.2rem;
+      &:not(:first-child) {
+        border-top: $border;
+      }
       &:last-child {
         border-bottom: $border;
       }
@@ -372,7 +373,7 @@
       flex-direction: column;
       gap: 3.2rem;
       padding-block: 3.2rem;
-
+      @include responsive-padding;
       .contactList {
         flex: 1;
 

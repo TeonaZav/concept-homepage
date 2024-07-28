@@ -1,7 +1,6 @@
 @import "../../styles/abstracts/variables";
 @import "../../styles/abstracts/mixins";
 
-
 .content {
   padding: 2rem;
   display: inline-flex;
@@ -11,7 +10,6 @@
   flex: 1;
   gap: 1.2rem;
   white-space: wrap;
-  min-height: 100%;
 
   @include breakpoint("sm") {
     padding: 2.8rem;
