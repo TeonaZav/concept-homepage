@@ -1,6 +1,5 @@
 import styles from "./header.module.scss";
 import { logo } from "../logo/logo";
-import { navItems } from "./linksData";
 import { handleNavButtonClick, handleDocumentClick } from "./eventHandlers";
 import { languageSwitch } from "../languageSwitch/languageSwitch";
 import { BurgerButton } from "../burgerButton/burgerButton";
@@ -8,16 +7,21 @@ import { SearchButton } from "../searchButton/searchButton";
 import { getArrowIcon, getArrowUpIcon } from "../../utils/icons";
 
 export class Header {
+  constructor(translations) {
+    this.translations = translations;
+    console.log(this.translations.navItems);
+  }
+
   render(container, onBurgerToggle) {
     container.innerHTML = `
       <header class="${styles.header}">
        <div class="${styles.wrapper}">
         <div class="${styles.container}">
           <div class="${styles.logo}">
-            ${logo("#555f62")}
+            ${logo("#555f62", this.translations.language)}
           </div>
           <nav class="${styles.nav}">
-            ${navItems
+            ${this.translations.navItems
               .map(
                 (item) => `
               <div class="${styles.navItem}">
@@ -91,7 +95,7 @@ export class Header {
     container.innerHTML += `
     <a href="#" class="${styles.linkButton}">
       ${getArrowIcon()}
-      <span>გამოიწერეთ ნაკრები</span>
+      <span>${this.translations.navLinkText}</span>
     </a>
   `;
 
