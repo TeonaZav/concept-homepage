@@ -21,14 +21,11 @@ export class OffersSection {
       "beforeend",
       `
       <section class="${styles.offersSection}">
-          ${sectionHeaderHTML}
-        <div class="${styles.sliderContainer}">
-          <div id="offers-slider" class="${styles.sliderWrapper}"></div>
-        </div>
+        ${sectionHeaderHTML}
       </section>`
     );
 
     const slider = new OffersSlider(this.slides);
-    slider.render(document.getElementById("offers-slider"));
+    slider.render(container.querySelector(`.${styles.offersSection}`));
   }
 }
