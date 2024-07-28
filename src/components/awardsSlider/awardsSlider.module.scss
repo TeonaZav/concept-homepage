@@ -12,8 +12,7 @@
   flex: 1;
   gap: 1.6rem;
   white-space: wrap;
-  min-height: 100%;
-  pointer-events: none;
+overflow: visible;
   @include breakpoint("sm") {
     gap: 2.4rem;
   }
