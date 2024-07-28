@@ -6,6 +6,7 @@
   width: 100%;
   overflow-x: auto;
   @include section-margin-block;
+  @include responsive-padding;
 }
 
 .selectPackageContainer {

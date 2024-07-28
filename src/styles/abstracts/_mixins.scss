@@ -3,21 +3,48 @@
 @mixin responsive-container {
   margin: 0 auto;
   width: 100%;
-  padding-inline: $container-padding-mobile;
-
-  @include breakpoint("xs") {
-    padding-inline: $container-padding-tablet;
-  }
-  @include breakpoint("md") {
-    padding-inline: $container-padding-desktop;
-  }
-
-  @include breakpoint("xl") {
-    padding-inline: $container-padding-large-desktop;
-    max-width: $container-max-width;
-  }
+  max-width: $container-max-width;
 }
 
+@mixin responsive-padding($direction: "inline") {
+  @if $direction == "inline" {
+    padding-inline: $container-padding-mobile;
+
+    @include breakpoint("xs") {
+      padding-inline: $container-padding-tablet;
+    }
+    @include breakpoint("md") {
+      padding-inline: $container-padding-desktop;
+    }
+    @include breakpoint("xl") {
+      padding-inline: $container-padding-large-desktop;
+    }
+  } @else if $direction == "left" {
+    padding-left: $container-padding-mobile;
+
+    @include breakpoint("xs") {
+      padding-left: $container-padding-tablet;
+    }
+    @include breakpoint("md") {
+      padding-left: $container-padding-desktop;
+    }
+    @include breakpoint("xl") {
+      padding-left: $container-padding-large-desktop;
+    }
+  } @else if $direction == "right" {
+    padding-right: $container-padding-mobile;
+
+    @include breakpoint("xs") {
+      padding-right: $container-padding-tablet;
+    }
+    @include breakpoint("md") {
+      padding-right: $container-padding-desktop;
+    }
+    @include breakpoint("xl") {
+      padding-right: $container-padding-large-desktop;
+    }
+  }
+}
 @mixin breakpoint($point) {
   $breakpoint: map-get($breakpoints, $point);
   @if $breakpoint {

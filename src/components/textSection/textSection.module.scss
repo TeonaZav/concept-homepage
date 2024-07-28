@@ -3,6 +3,7 @@
 
 .textSection {
   @include section-margin-block;
+  @include responsive-padding;
 }
 
 .textBox {

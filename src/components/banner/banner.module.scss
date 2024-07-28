@@ -6,6 +6,9 @@
   position: relative;
   width: 100%;
   @include section-margin-block;
+  @include breakpoint("sm") {
+    @include responsive-padding;
+  }
 }
 
 .bannerWrapper {

@@ -28,3 +28,39 @@
     opacity: 1;
   }
 }
+
+@keyframes carouselEffect {
+  0% {
+    transform: translateX(var(--start));
+  }
+  50% {
+    transform: translateX(calc(var(--start) - 10px));
+  }
+  100% {
+    transform: translateX(var(--end));
+  }
+}
+
+@keyframes rubberband {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(
+      -15px
+    ); 
+  }
+  50% {
+    transform: translateX(
+      15px
+    ); 
+  }
+  75% {
+    transform: translateX(
+      -10px
+    ); 
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
