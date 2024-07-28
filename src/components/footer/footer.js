@@ -2,15 +2,13 @@ import styles from "./footer.module.scss";
 import { getTbcLogo } from "../../utils/icons";
 import { logo } from "../logo/logo";
 import { languageSwitch } from "../languageSwitch/languageSwitch";
-import {
-  navItemsFooter,
-  navItemsFooterMobile,
-  contactInfo,
-  socialLinks,
-} from "./linksData";
 import { getArrowDownIcon } from "../../utils/icons";
 
 export class Footer {
+  constructor(translations) {
+    this.translations = translations;
+  }
+
   render(container) {
     this.container = container;
     this.isBurgerActive = false;
@@ -19,13 +17,13 @@ export class Footer {
 
   updateFooterContent() {
     const navItems = this.isBurgerActive
-      ? navItemsFooterMobile
-      : navItemsFooter;
+      ? this.translations?.navItemsFooterMobile
+      : this.translations?.navItemsFooter;
 
     this.container.innerHTML = `
       <div class="${styles.container}">
         <div class="${styles.topSection}">
-          ${logo("#141719")}
+          ${logo("#141719", this.translations.language)}
           ${languageSwitch("footer")}
         </div>
 
@@ -55,9 +53,9 @@ export class Footer {
           </div>
           <div class="${styles.contacts}">
             <div class="${styles.contactList}">
-              <h4>დაგვიკავშირდით:</h4>
+              <h4>${this.translations?.contactInfo?.title}:</h4>
               <ul>
-                ${contactInfo
+                ${this.translations?.contactInfo?.data
                   .map(
                     (info) => `<li><img src="${info.image}"/> ${info.text}</li>`
                   )
@@ -65,9 +63,11 @@ export class Footer {
               </ul>
             </div>
             <div class="${styles.socialLinks}">
-              <h4>სოციალური ქსელები:</h4>
+              <h4>${
+                this.translations?.socialLinks?.title || "სოციალური ქსელები"
+              }:</h4>
               <div>
-                ${socialLinks
+                ${this.translations?.socialLinks.data
                   .map(
                     (
                       social
@@ -85,11 +85,15 @@ export class Footer {
         <div class="${styles.footerBottomCt}">
           <div class="${styles.copyright}">
             ${getTbcLogo()}
-            <span>2024 ყველა უფლება დაცულია<span>
+            <span>${this.translations.copyright.text}<span>
           </div>
           <div class="${styles.termLinks}">
-            <a href="#">კონფიდენციალურობა</a>
-            <a href="#">წესები და პირობები</a>
+          ${this.translations.copyright?.links
+            .map((link) => {
+              return `<a href=${link.path}>${link.text}</a>`;
+            })
+            .join("")}
+     
           </div>
         </div>
       </div>
