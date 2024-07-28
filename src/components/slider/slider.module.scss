@@ -7,6 +7,7 @@
   height: 100%;
   height: max-content;
   overflow: hidden;
+
   @include breakpoint("xl") {
     @include responsive-container;
   }
@@ -14,9 +15,9 @@
 
 .sliderWrapper {
   display: flex;
-  overflow-x: hidden; 
+  overflow-x: hidden;
   white-space: nowrap;
-  cursor: default; 
+  cursor: default;
   overscroll-behavior: contain !important;
   backface-visibility: hidden;
   -webkit-overflow-scrolling: touch;
@@ -28,6 +29,7 @@
   scrollbar-color: transparent transparent;
   scroll-behavior: smooth;
   padding-inline: $container-padding-mobile;
+
   padding-bottom: 2.8rem;
   height: 100%;
   transition: all 0.3s ease;
@@ -39,6 +41,9 @@
     padding-inline: $container-padding-desktop;
   }
 
+  @media (min-width: 1210px) {
+    padding-inline: calc((100vw - 1110px) / 2);
+  }
   @include breakpoint("xl") {
     padding-inline: $container-padding-large-desktop;
     max-width: $container-max-width;
@@ -49,7 +54,7 @@
     height: 0;
   }
   &.is-grabbing {
-    cursor: grabbing; 
+    cursor: grabbing;
   }
 }
 
@@ -75,6 +80,11 @@
     }
   }
 
+  &.awardsSlideParent {
+    border: none;
+    background-color: $bg-color-secondary;
+  }
+
   @media (min-width: 600px) {
     max-width: calc((100% - 1.5rem) / 2);
   }
@@ -86,12 +96,20 @@
     border-radius: 0.8rem;
   }
 }
+
 .progressBarControlCt {
   position: relative;
   display: flex;
   align-items: center;
   gap: 3.5rem;
   @include responsive-padding;
+
+  @media (min-width: 1210px) {
+    padding-inline: calc((100vw - 1110px) / 2);
+  }
+  @include breakpoint("xl") {
+    @include responsive-padding;
+  }
 }
 .progressBarContainer {
   flex-grow: 1;
@@ -103,17 +121,7 @@
   right: 9rem;
   height: 0.2rem;
   background: rgba(0, 0, 0, 0.1);
-
-  @include breakpoint("xs") {
-    left: $container-padding-tablet;
-  }
-  @include breakpoint("md") {
-    left: $container-padding-desktop;
-  }
-
-  @include breakpoint("xl") {
-    left: $container-padding-large-desktop;
-  }
+  left: 0;
 }
 
 .progressBar {
@@ -128,7 +136,7 @@
   display: inline-block;
   display: none;
   gap: 1rem;
-  z-index: 999;
+  z-index: 100;
 
   @include breakpoint("xl") {
     display: flex;
@@ -162,7 +170,6 @@
 .rubberband-effect {
   animation: rubberband 0.8s ease-out;
 }
-
 
 .imgWrapper {
   position: relative;

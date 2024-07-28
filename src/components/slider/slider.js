@@ -24,63 +24,64 @@ export class Slider {
     this.handleMove = this.handleMove.bind(this);
   }
 
-  /**
+ /**
    * Renders the slider component into the given container.
    * @param {HTMLElement} container - The container to render the slider in.
    */
-  render(container) {
-    container.insertAdjacentHTML(
-      "beforeend",
-      `
-      <div class="${styles.sliderContainer}">
-        <div class="${styles.sliderWrapper}">
-          ${this.slides.map((slide) => this.renderSlide(slide)).join("")}
-        </div>
-        <div class="${styles.progressBarControlCt}">
-          <div class="${styles.progressBarContainer}">
-            <div class="${styles.progressBar}"></div>
-          </div>
-          <div class="${styles.sliderControls}">
-            <button class="${styles.sliderButton} ${styles.prev}" disabled>
-              ${getArrowIconLeft()}
-            </button>
-            <button class="${styles.sliderButton} ${styles.next}">
-              ${getArrowIconRight()}
-            </button>
-          </div>
-        </div>
-      </div>`
-    );
-
-    this.initEvents(container);
-  }
-
-  /**
-   * Renders a single slide.
-   * @param {Object} slide - The slide data object.
-   * @returns {string} - The HTML string for the slide.
-   */
-  renderSlide(slide) {
-    return `
-      <div class="${styles.slide}">
-        ${this.renderSlideContent(slide)}
-      </div>`;
-  }
-
-  /**
-   * Renders the content of a slide.
-   * @param {Object} slide - The slide data object.
-   * @returns {string} - The HTML string for the slide content.
-   */
-  renderSlideContent(slide) {
-    return `
-      <div class="${styles.imgWrapper}">
-        <img src="${slide.image}" alt="${slide.alt}" class="${styles.bannerImg}">
+ render(container) {
+  container.insertAdjacentHTML(
+    "beforeend",
+    `
+    <div class="${styles.sliderContainer}">
+      <div class="${styles.sliderWrapper}">
+        ${this.slides.map((slide) => this.renderSlide(slide)).join("")}
       </div>
-      <div class="${styles.content}">
-        <h3 class="${styles.cardTitle}">${slide.title}</h3>
-      </div>`;
-  }
+      <div class="${styles.progressBarControlCt}">
+        <div class="${styles.progressBarContainer}">
+          <div class="${styles.progressBar}"></div>
+        </div>
+        <div class="${styles.sliderControls}">
+          <button class="${styles.sliderButton} ${styles.prev}" disabled>
+            ${getArrowIconLeft()}
+          </button>
+          <button class="${styles.sliderButton} ${styles.next}">
+            ${getArrowIconRight()}
+          </button>
+        </div>
+      </div>
+    </div>`
+  );
+
+  this.initEvents(container);
+}
+
+/**
+ * Renders a single slide.
+ * @param {Object} slide - The slide data object.
+ * @returns {string} - The HTML string for the slide.
+ */
+renderSlide(slide) {
+  const slideContent = this.renderSlideContent(slide);
+  return `
+    <div class="${styles.slide}">
+      ${slideContent}
+    </div>`;
+}
+
+/**
+ * Renders the content of a slide. Can be overridden by child classes.
+ * @param {Object} slide - The slide data object.
+ * @returns {string} - The HTML string for the slide content.
+ */
+renderSlideContent(slide) {
+  return `
+    <div class="${styles.imgWrapper}">
+      <img src="${slide.image}" alt="${slide.alt}" class="${styles.bannerImg}">
+    </div>
+    <div class="${styles.content}">
+      <h3 class="${styles.cardTitle}">${slide.title}</h3>
+    </div>`;
+}
 
   /**
    * Initializes event listeners for slider interactions.
@@ -248,15 +249,19 @@ export class Slider {
         )
       );
     } else {
-      const containerWidth = this.sliderWrapper.clientWidth;
-      slideWidth =
-        (containerWidth - (this.slidesPerView - 1) * this.spaceBetween) /
-        this.slidesPerView;
+      const containerWidth = this.sliderWrapper.clientWidth / 10; 
+      const totalSpaceBetween = (this.slidesPerView - 1) * (this.spaceBetween / 10); 
+      slideWidth = (containerWidth - totalSpaceBetween) / this.slidesPerView; 
     }
-    slideWidth = slideWidth / 10; // Convert to rem
-    Array.from(this.sliderWrapper.children).forEach((slide) => {
-      slide.style.width = `${slideWidth}rem`;
-      slide.style.marginRight = `${this.spaceBetweenRem}rem`;
+  
+    Array.from(this.sliderWrapper.children).forEach((slide, index, array) => {
+      slide.style.width = `${slideWidth}rem`; 
+  
+      if (index < array.length - 1) {
+        slide.style.marginRight = `${this.spaceBetween / 10}rem`; 
+      } else {
+        slide.style.marginRight = '0';
+      }
     });
   }
 
@@ -340,9 +345,9 @@ export class Slider {
     const maxScrollLeft =
       this.sliderWrapper.scrollWidth - this.sliderWrapper.clientWidth;
     const progressRatio = this.sliderWrapper.scrollLeft / maxScrollLeft;
-    const progressBarWidth = window.innerWidth < 768 ? 12.7 : 30; // rem units
+    const progressBarWidth = window.innerWidth < 768 ? 12.7 : 30; 
     const maxProgressBarPosition =
-      this.progressBarContainer.clientWidth / 10 - progressBarWidth; // in rem
+      this.progressBarContainer.clientWidth / 10 - progressBarWidth;
     let progressPosition = progressRatio * maxProgressBarPosition;
 
     if (progressPosition < 0) progressPosition = 0;
